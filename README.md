@@ -9,11 +9,11 @@ Create an app that allows users to enter a city name and returns the latitude, l
 
 ## Getting Started
 
-Need to create React app, install Bootstrap and Axios
+Need to create React app, install Bootstrap and Axios.
 
 ## Architecture
 
-This app uses HTML5, CSS3, JavaScript and ReactJS
+This app uses HTML5, CSS3, JavaScript and ReactJS.
 
 ## Change Log
 
@@ -27,10 +27,10 @@ Collaborated with Marco Villafana
 
 Name of feature: City-Explorer
 
-Estimate of time needed to complete: 3 hours
+Estimate of time needed to complete: 3 hours.
 
 Start time: 1400
 
 Finish time: 1730
 
-Actual time needed to complete: 3.5 hours
+Actual time needed to complete: 3.5 hours.
