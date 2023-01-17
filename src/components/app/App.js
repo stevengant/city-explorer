@@ -39,8 +39,8 @@ class App extends React.Component {
       this.setState({
         cityData: cityDataFromAxios.data[0],
         cityName: cityDataFromAxios.data[0].display_name,
-        latitude: cityDataFromAxios.data[0].latitude,
-        longitude: cityDataFromAxios.data[0].longitude,
+        latitude: cityDataFromAxios.data[0].lat,
+        longitude: cityDataFromAxios.data[0].lon,
         error: false
       })
 
@@ -61,7 +61,7 @@ class App extends React.Component {
         <form onSubmit={this.getCityData}>
           <label htmlFor=""> Pick a City
             <input type="text" onInput={this.handleInput} />
-            <button class='myButton' type='submit'>Explore</button>
+            <button className='myButton' type='submit'>Explore</button>
           </label>
 
         </form>
@@ -80,7 +80,7 @@ class App extends React.Component {
               <Card.Body>
                 <h3>{this.state.cityData.display_name}</h3>
                 <h5>{this.state.cityData.lat} {this.state.cityData.lon}</h5>
-                <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&markers=size:tiny|color:red=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`} alt={`Map of ${this.state.cityData.display_name}`} />
+                <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`} alt={`Map of ${this.state.cityData.display_name}`} />
               </Card.Body>
             </Card>
         }
