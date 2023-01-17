@@ -69,13 +69,18 @@ class App extends React.Component {
         {/* Ternary - W ? T : F */}
         {
           this.state.error
-            ? <p>{this.state.errorMessage}</p>
+            ? <Card style={{ width: '18rem' }}>
+              <Card.Body>
+                <h3>{this.state.errorMessage}</h3>
+                <Card.Img class='error' src={"https://drudesk.com/sites/default/files/2018-02/404-error-page-not-found.jpg"}></Card.Img>
+              </Card.Body>
+            </Card>
             :
             <Card style={{ width: '18rem' }}>
               <Card.Body>
                 <h3>{this.state.cityData.display_name}</h3>
                 <h5>{this.state.cityData.lat} {this.state.cityData.lon}</h5>
-                <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&markers=size:tiny|color:red=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`} alt={`Map of ${this.state.cityData.display_name}`} />
+                <img class='map' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&markers=size:tiny|color:red=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`} alt={`Map of ${this.state.cityData.display_name}`} />
               </Card.Body>
             </Card>
         }

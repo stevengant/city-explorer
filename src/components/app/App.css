@@ -53,4 +53,14 @@ h3, h5 {
   font-style: normal;
   font-variant: small-caps;
   text-transform: none;
+  /* background-color: #1C6EA4;
+  width: fit-content; */
+}
+
+.card {
+  width: fit-content;
+}
+
+.error {
+  width: 500px;
 }
