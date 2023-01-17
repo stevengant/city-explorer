@@ -61,7 +61,7 @@ class App extends React.Component {
         <form onSubmit={this.getCityData}>
           <label htmlFor=""> Pick a City
             <input type="text" onInput={this.handleInput} />
-            <button type='submit'>Explore</button>
+            <button class='myButton' type='submit'>Explore</button>
           </label>
 
         </form>
