@@ -57,10 +57,19 @@ h3, h5 {
   width: fit-content; */
 }
 
-.card {
-  width: fit-content;
+
+.card-img {
+  box-shadow: 2px 2px 2px #1C6EA4;
 }
 
 .error {
   width: 500px;
+}
+
+.weatherCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  padding-top: 20px;
 }
