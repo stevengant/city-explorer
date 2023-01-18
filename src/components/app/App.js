@@ -26,12 +26,11 @@ class App extends React.Component {
       city: e.target.value
     })
   }
-
+  // *** DEFINE WEATHER HANDLER TO RETRIEVE DATA FROM BACKEND ***
   fetchWeather = async (cityName) => {
-
     try {
-      let url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${cityName}`;
-      // let url = await axios.get`(${process.env.REACT_APP_SERVER})/weather?lat=${cityInfo.lat}&lon=${cityInfo.lon}&searchQuery=${this.state.city}`;
+      // let url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${cityName}`;
+      let url = `${process.env.REACT_APP_SERVER}/weather?lat=${cityName.lat}&lon=${cityName.lon}`;
 
       let dailyForecast = await axios.get(url);
       console.log(dailyForecast.data);
@@ -60,7 +59,7 @@ class App extends React.Component {
       let cityDataFromAxios = await axios.get(url)
       // console.log(cityDataFromAxios.data);
 
-      // Save data to state
+      // *** SAVE WEATHER DATA TO STATE ***
       this.setState({
         cityData: cityDataFromAxios.data[0],
         cityName: cityDataFromAxios.data[0].display_name,
@@ -70,7 +69,7 @@ class App extends React.Component {
         mapUrl: url
       });
       // console.log(cityDataFromAxios.data[0].display_name.split(',')[0]);
-      this.fetchWeather(cityDataFromAxios.data[0].display_name.split(',')[0]);
+      this.fetchWeather(cityDataFromAxios.data[0]);
 
     } catch (error) {
       console.log(error);
@@ -120,7 +119,7 @@ class App extends React.Component {
               {this.state.cityName && <Card.Body>
                 <h3>{this.state.cityData.display_name}</h3>
                 <h5>{this.state.cityData.lat} {this.state.cityData.lon}</h5>
-                <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.lat},${this.state.lon}&zoom=12`} alt={`Map of ${this.state.cityData.display_name}`} />
+                <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&markers=size:tiny|color:red|=${this.state.lat},${this.state.lon}&zoom=12`} alt={`Map of ${this.state.cityData.display_name}`} />
                 {/* {this.state.dailyForecast && this.state.dailyForecast.map(day => <p key={day.date}>{day.date}</p>)} */}
 
               </Card.Body>}
