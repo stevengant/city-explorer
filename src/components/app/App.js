@@ -2,6 +2,7 @@ import React from "react";
 import '../app/App.css';
 import axios from 'axios';
 import Weather from "../weather/Weather";
+import Movies from "../movies/Movies";
 import { Card, Container } from "react-bootstrap";
 
 
@@ -17,7 +18,8 @@ class App extends React.Component {
       cityName: '',
       lat: '',
       lon: '',
-      dailyForecast: []
+      dailyForecast: [],
+      movieData: []
     }
   }
 
@@ -33,9 +35,30 @@ class App extends React.Component {
       let url = `${process.env.REACT_APP_SERVER}/weather?lat=${cityName.lat}&lon=${cityName.lon}`;
 
       let dailyForecast = await axios.get(url);
-      console.log(dailyForecast.data);
+      // console.log(dailyForecast.data);
       this.setState({
         dailyForecast: dailyForecast.data
+      });
+
+    } catch (error) {
+      console.log(error.message);
+      console.log(error);
+      this.setState({
+        error: true,
+        errorMessage: error.message
+      });
+
+    }
+  }
+  // *** DEFINE MOVIE HANDLER TO RETRIEVE DATA FROM BACKEND ***
+  fetchMovies = async (cityName) => {
+    try {
+      let movieUrl = `${process.env.REACT_APP_SERVER}/movie?cityName=${cityName}`;
+
+      let movieData = await axios.get(movieUrl);
+      console.log(movieData.data);
+      this.setState({
+        movieData: movieData.data
       });
 
     } catch (error) {
@@ -70,6 +93,7 @@ class App extends React.Component {
       });
       // console.log(cityDataFromAxios.data[0].display_name.split(',')[0]);
       this.fetchWeather(cityDataFromAxios.data[0]);
+      this.fetchMovies(this.state.city);
 
     } catch (error) {
       console.log(error);
@@ -92,10 +116,10 @@ class App extends React.Component {
             </label>
           </form>
         </header>
-         <Container className="weatherCard">
+        <Container className="weatherCard">
           {this.state.dailyForecast.map(forecast => {
-            return(
-              <Weather 
+            return (
+              <Weather
                 date={forecast.date}
                 description={forecast.description}
               />
@@ -123,10 +147,20 @@ class App extends React.Component {
                 {/* {this.state.dailyForecast && this.state.dailyForecast.map(day => <p key={day.date}>{day.date}</p>)} */}
 
               </Card.Body>}
-              
+
             </Card>
         }
+        <Container className="movieCard">
+          {this.state.movieData.map(movies => {
+            return (
+              <Movies
+                title={movies.title}
+                image_url={movies.image_url}
+              />
+            )
+          })}
 
+        </Container>
 
       </>
     )
