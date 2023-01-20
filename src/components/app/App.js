@@ -56,7 +56,7 @@ class App extends React.Component {
       let movieUrl = `${process.env.REACT_APP_SERVER}/movie?cityName=${cityName}`;
 
       let movieData = await axios.get(movieUrl);
-      console.log(movieData.data);
+      // console.log(movieData.data);
       this.setState({
         movieData: movieData.data
       });
@@ -117,14 +117,9 @@ class App extends React.Component {
           </form>
         </header>
         <Container className="weatherCard">
-          {this.state.dailyForecast.map(forecast => {
-            return (
-              <Weather
-                date={forecast.date}
-                description={forecast.description}
-              />
-            )
-          })}
+          <Weather weather={this.state.dailyForecast} />
+
+
 
         </Container>
 
@@ -132,14 +127,14 @@ class App extends React.Component {
         {
 
           this.state.error
-            ? <Card style={{ width: '18rem' }}>
+            ? <Card>
               <Card.Body>
                 <h3>{this.state.errorMessage}</h3>
                 <Card.Img className='error' src={"https://drudesk.com/sites/default/files/2018-02/404-error-page-not-found.jpg"}></Card.Img>
               </Card.Body>
             </Card>
             :
-            <Card style={{ width: '18rem' }}>
+            <Card>
               {this.state.cityName && <Card.Body>
                 <h3>{this.state.cityData.display_name}</h3>
                 <h5>{this.state.cityData.lat} {this.state.cityData.lon}</h5>
@@ -150,17 +145,9 @@ class App extends React.Component {
 
             </Card>
         }
-        <Container className="movieCard">
-          {this.state.movieData.map(movies => {
-            return (
-              <Movies
-                title={movies.title}
-                image_url={movies.image_url}
-              />
-            )
-          })}
 
-        </Container>
+        <Movies movieData={this.state.movieData} />
+
 
       </>
     )
