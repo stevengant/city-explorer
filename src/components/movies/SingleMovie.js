@@ -12,7 +12,6 @@ class SingleMovie extends React.Component {
       ...rest
     } = this.props
 
-    console.log(this.props.movie);
     return (
       <>
         <Carousel.Item {...rest} key={this.props.key}>

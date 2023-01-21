@@ -35,7 +35,7 @@ class App extends React.Component {
       let url = `${process.env.REACT_APP_SERVER}/weather?lat=${cityName.lat}&lon=${cityName.lon}`;
 
       let dailyForecast = await axios.get(url);
-      // console.log(dailyForecast.data);
+      console.log(dailyForecast.data);
       this.setState({
         dailyForecast: dailyForecast.data
       });
@@ -117,7 +117,7 @@ class App extends React.Component {
           </form>
         </header>
         <Container className="weatherCard">
-          <Weather weather={this.state.dailyForecast} />
+          <Weather weather={this.state.dailyForecast} /> 
 
 
 
